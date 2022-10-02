@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//retrieves the text file from folder
-public class TextReferenceGetter : MonoBehaviour
+public class ReportManager : MonoBehaviour
 {
-    private TextAsset textReferenced;
+    public GameObject Report1;
+    public GameObject Report2;
+    public GameObject Report3;
+
     // Start is called before the first frame update
     void Start()
     {
