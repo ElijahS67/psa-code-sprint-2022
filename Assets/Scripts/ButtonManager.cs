@@ -8,32 +8,28 @@ using UnityEngine.SceneManagement;
 public class ButtonManager : MonoBehaviour
 //for handling buttons in the main menu, shop and settings screens only
 {
-    //for managind windows
-    private bool isActive;
     public GameObject uploadWindows; //this is for the uload
     public GameObject viewWindows;
     public ViewReportWindow viewReportWindow;
-    private bool viewisActive;
-
+    
     private int currentID = -1;
     private ReportArea reportArea;
     private ReportAreaManager reportAreaManager;
 
     private Texture2D texture2D;
     public Texture2D[] imageArray; //when view, display from here
-    public String[] textArray;
+    public string[] textArray;
 
-    public TMP_InputField textInput;
+    public TMP_InputField textInput1; //for upload
+    public TMP_InputField textInput2; //for viewing
+    
     
     private void Awake()
     {
-        // this.isActive = false;
-        // this.viewisActive = false;
-        
         uploadWindows.SetActive(false);
         viewWindows.SetActive(false);
-        
-        textInput.gameObject.SetActive(false);
+
+        textInput2.readOnly = true; //viewing text input, non-editable
 
         reportArea = FindObjectOfType<ReportArea>();
         reportAreaManager = FindObjectOfType<ReportAreaManager>();
@@ -45,29 +41,29 @@ public class ButtonManager : MonoBehaviour
 
     private void Update()
     {
-        // //for setting windows as inactive
-        // if (this.isActive == false) {
-        //     uploadWindows.SetActive(false);
-        // } else {
-        //     uploadWindows.SetActive(true);
-        // }
-        //
-        // if (this.viewisActive == false) {
-        //     viewWindows.SetActive(false);
-        // } else {
-        //     viewWindows.SetActive(true);
-        // }
 
-        if (textInput.IsActive())
+        if (textInput1.IsActive())
         {
-            textArray[currentID] = textInput.text;
-        }
-        
-        if (!textInput.IsActive() && textInput.readOnly)
-        {
-            textInput.text = textArray[currentID];
+
+            if (textInput1.text == "" && textArray[currentID] != "")
+            {
+                textInput1.text = textArray[currentID];
+            }
+
+            textArray[currentID] = textInput1.text;
         }
 
+        if (textInput2.IsActive())
+        {
+            if (textArray[currentID] == "")
+            {
+                textInput2.text = "(Please enter some text under Upload)";
+            }
+            else
+            {
+                textInput2.text = textArray[currentID];
+            }
+        }
     }
 
     // opens the upload window when upload button is pressed
@@ -75,18 +71,16 @@ public class ButtonManager : MonoBehaviour
     public void OpenWindowButton(int id)
     {
         currentID = id;
-        this.isActive = true;
         uploadWindows.SetActive(true);
-        textInput.gameObject.SetActive(true);
+        textInput1.text = "";
         // Debug.Log(id);
     }
 
     //closes the upload window
     public void CloseWindowButton()
     {
-        this.isActive = false;
         uploadWindows.SetActive(false);
-        textInput.gameObject.SetActive(false);
+        textInput1.text = "";
     }
 
     //button functionality added into unity GUI
@@ -167,29 +161,22 @@ public class ButtonManager : MonoBehaviour
     public void OpenViewButton(int id)
     {
         currentID = id;
-        this.viewisActive = true;
         viewWindows.SetActive(true);
         viewReportWindow.replaceImage(imageArray[currentID]);
         //Debug.Log("is this null?" + viewReportWindow);
-        textInput.gameObject.SetActive(true);
-        textInput.readOnly = true;
         // Debug.Log(id);
     }
 
 //closes the view report window
     public void CloseViewButton()
     {
-        this.viewisActive = false;
         viewWindows.SetActive(false);
-        textInput.gameObject.SetActive(false);
-        textInput.readOnly = false;
     }
     
 
 //closes the upload window only
     public void BackButton()
     {
-        this.isActive = false;
         uploadWindows.SetActive(false);
     }
 }
