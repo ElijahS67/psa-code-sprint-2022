@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ViewReportWindow : MonoBehaviour
 {
     private ButtonManager buttonManager;
+    private ReportAreaManager reportAreaManager;
     private Image[] imageArray;
     private Image image;
     
@@ -13,6 +14,7 @@ public class ViewReportWindow : MonoBehaviour
     void Awake()
     {
         buttonManager = FindObjectOfType<ButtonManager>();
+        reportAreaManager = FindObjectOfType<ReportAreaManager>();
         imageArray = GetComponentsInChildren<Image>();
         Debug.Log(imageArray.Length);
         
@@ -21,11 +23,12 @@ public class ViewReportWindow : MonoBehaviour
             Debug.Log(i);
         }
 
-        image = imageArray[1]; //the image we want to replace
+        image = imageArray[1];
     }
 
     public void replaceImage(Texture2D texture2D)
     {
+  
         if (texture2D == null)
         {
             image.color = Color.black;

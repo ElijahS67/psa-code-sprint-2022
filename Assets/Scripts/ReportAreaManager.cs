@@ -5,13 +5,18 @@ using UnityEngine.UI;
 
 public class ReportAreaManager : MonoBehaviour
 {
-    private ReportArea[] reportAreaArray;
+    public ReportArea[] reportAreaArray;
     
     // Start is called before the first frame update
     void Awake()
     {
         reportAreaArray = GetComponentsInChildren<ReportArea>();
         Debug.Log(reportAreaArray.Length);
+    }
+
+    public ReportArea getReportArea(int i) {
+        //get the report area
+        return reportAreaArray[i];
     }
 
     //id starts from 0
