@@ -12,12 +12,12 @@ public class ButtonManager : MonoBehaviour
     private bool isActive;
     public GameObject uploadWindows; //this is for the uload
     public GameObject viewWindows;
+    public ViewReportWindow viewReportWindow;
     private bool viewisActive;
 
     private int currentID = -1;
     private ReportArea reportArea;
     private ReportAreaManager reportAreaManager;
-    private ViewReportWindow viewReportWindow;
 
     private Texture2D texture2D;
     public Texture2D[] imageArray; //when view, display from here
@@ -37,7 +37,7 @@ public class ButtonManager : MonoBehaviour
 
         reportArea = FindObjectOfType<ReportArea>();
         reportAreaManager = FindObjectOfType<ReportAreaManager>();
-        viewReportWindow = FindObjectOfType<ViewReportWindow>();
+        //viewReportWindow = FindObjectOfType<ViewReportWindow>();
         
         imageArray = new Texture2D[3];
         textArray = new string[3];
@@ -45,7 +45,7 @@ public class ButtonManager : MonoBehaviour
 
     private void Update()
     {
-        // //for setting windows as ineactive
+        // //for setting windows as inactive
         // if (this.isActive == false) {
         //     uploadWindows.SetActive(false);
         // } else {
@@ -170,7 +170,7 @@ public class ButtonManager : MonoBehaviour
         this.viewisActive = true;
         viewWindows.SetActive(true);
         viewReportWindow.replaceImage(imageArray[currentID]);
-        Debug.Log("is this null?" + viewReportWindow);
+        //Debug.Log("is this null?" + viewReportWindow);
         textInput.gameObject.SetActive(true);
         textInput.readOnly = true;
         // Debug.Log(id);
