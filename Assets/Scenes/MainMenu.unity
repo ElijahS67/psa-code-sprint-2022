@@ -1521,6 +1521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uploadWindows: {fileID: 430582897}
   viewWindows: {fileID: 530004327}
+  viewReportWindow: {fileID: 530004331}
   imageArray: []
   textArray: []
   textInput: {fileID: 1717639116}
@@ -4807,6 +4808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21f317fd22ffd3b4e9776dd7a7835803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reportAreaArray: []
 --- !u!1 &2071231602
 GameObject:
   m_ObjectHideFlags: 0
